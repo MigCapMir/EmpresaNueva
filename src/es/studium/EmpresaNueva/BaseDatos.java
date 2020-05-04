@@ -53,7 +53,7 @@ public class BaseDatos
 				fechaEuropea = (rs.getString("fechaAlta")).split("-");
 				resultado = resultado + rs.getInt("idCliente") + "-" +
 						rs.getString("nombreCliente") + "-" +
-						fechaEuropea[2]+"\\"+fechaEuropea[1]+"\\"+fechaEuropea[0]+"\n";
+						fechaEuropea[2]+"/"+fechaEuropea[1]+"/"+fechaEuropea[0]+"\n";
 			}
 		}
 		catch (SQLException sqle)
@@ -105,7 +105,7 @@ public class BaseDatos
 				fechaEuropea = (rs.getString("fechaAlta")).split("-");
 				resultado = resultado + rs.getInt("idCliente") + "-" +
 						rs.getString("nombreCliente") + "-" +
-						fechaEuropea[2]+"\\"+fechaEuropea[1]+"\\"+fechaEuropea[0]+"#";
+						fechaEuropea[2]+"/"+fechaEuropea[1]+"/"+fechaEuropea[0]+"#";
 			}
 		}
 		catch (SQLException sqle)
@@ -121,7 +121,6 @@ public class BaseDatos
 		try
 		{
 			String sentencia = "DELETE FROM clientes WHERE idCliente = "+ idCliente;
-			System.out.println(sentencia);
 			//Crear una sentencia
 			statement = c.createStatement();
 			// Ejecutar la sentencia SQL
@@ -139,6 +138,159 @@ public class BaseDatos
 			System.out.println("Error 2-"+sqle.getMessage());
 		}
 		return (resultado);
+	}
+
+	public String consultarCliente(Connection c, int idCliente)
+	{
+		String resultado = "";
+		String[] fechaEuropea;
+		try
+		{
+			String sentencia = "SELECT * FROM clientes WHERE idCliente="+idCliente;
+			//Crear una sentencia
+			statement = c.createStatement();
+			//Crear un objeto ResultSet para guardar lo obtenido
+			//y ejecutar la sentencia SQL
+			rs = statement.executeQuery(sentencia);
+			rs.next();
+			fechaEuropea = (rs.getString("fechaAlta")).split("-");
+			resultado = rs.getInt("idCliente") + "-" +
+					rs.getString("nombreCliente") + "-" +
+					fechaEuropea[2]+"/"+fechaEuropea[1]+"/"+fechaEuropea[0];
+		}
+		catch (SQLException sqle)
+		{
+			System.out.println("Error 2-"+sqle.getMessage());
+		}
+		return (resultado);
+	}
+	
+	public int modificarCliente(Connection c, String sentencia)
+	{
+		int resultado = 1;
+		try
+		{
+			//Crear una sentencia
+			statement = c.createStatement();
+			// Ejecutar la sentencia SQL
+			if((statement.executeUpdate(sentencia))==1)
+			{
+				resultado = 0;
+			}
+			else
+			{
+				resultado = 1;
+			}
+		}
+		catch (SQLException sqle)
+		{
+			System.out.println("Error 2-"+sqle.getMessage());
+		}
+		return (resultado);
+	}
+	
+	public int altaFactura(Connection c, String sentencia)
+	{
+		int resultado = 0; // INSERT incorrecto
+		try
+		{
+			//Crear una sentencia
+			statement = c.createStatement();
+			//Crear un objeto ResultSet para guardar lo obtenido
+			//y ejecutar la sentencia SQL
+			if((statement.executeUpdate(sentencia))==1)
+			{
+				String sentenciaConsulta = "SELECT idFactura FROM facturas ORDER BY 1 DESC LIMIT 1";
+				ResultSet rs = statement.executeQuery(sentenciaConsulta);
+				if(rs.next())
+				{
+					resultado = rs.getInt("idFactura");
+				}
+			}
+			else
+			{
+				resultado = 0;
+			}
+		}
+		catch (SQLException sqle)
+		{
+			System.out.println("Error 2-"+sqle.getMessage());
+		}
+		return (resultado);
+	}
+	public String consultarServiciosChoice(Connection c)
+	{
+		String resultado = "";
+		try
+		{
+			String sentencia = "SELECT * FROM servicios ORDER BY 2";
+			//Crear una sentencia
+			statement = c.createStatement();
+			//Crear un objeto ResultSet para guardar lo obtenido
+			//y ejecutar la sentencia SQL
+			rs = statement.executeQuery(sentencia);
+			while (rs.next())
+			{
+				resultado = resultado + rs.getInt("idServicio") + "-" +
+						rs.getString("descripcionServicio") + "-" +
+						rs.getString("precioServicio")+"#";
+			}
+		}
+		catch (SQLException sqle)
+		{
+			System.out.println("Error 2-"+sqle.getMessage());
+		}
+		return (resultado);
+	}
+	
+	public int altaLineaFactura(Connection c, String sentencia)
+	{
+		int resultado = 0;
+		try
+		{
+			//Crear una sentencia
+			statement = c.createStatement();
+			//Crear un objeto ResultSet para guardar lo obtenido
+			//y ejecutar la sentencia SQL
+			if((statement.executeUpdate(sentencia))==1)
+			{
+				resultado = 0;
+			}
+			else
+			{
+				resultado = 1;
+			}
+		}
+		catch (SQLException sqle)
+		{
+			System.out.println("Error 2-"+sqle.getMessage());
+		}
+		return(resultado);
+	}
+	
+	public int actualizarFactura(Connection c, String sentencia)
+	{
+		int resultado = 0;
+		try
+		{
+			//Crear una sentencia
+			statement = c.createStatement();
+			//Crear un objeto ResultSet para guardar lo obtenido
+			//y ejecutar la sentencia SQL
+			if((statement.executeUpdate(sentencia))==1)
+			{
+				resultado = 0;
+			}
+			else
+			{
+				resultado = 1;
+			}
+		}
+		catch (SQLException sqle)
+		{
+			System.out.println("Error 2-"+sqle.getMessage());
+		}
+		return(resultado);
 	}
 
 	public void desconectar(Connection c)

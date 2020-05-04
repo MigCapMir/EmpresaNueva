@@ -13,7 +13,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.sql.Connection;
 
-public class AltaCliente extends Frame implements WindowListener, ActionListener
+public class ModificarCliente extends Frame implements WindowListener, ActionListener
 {
 	private static final long serialVersionUID = 1L;
 	Label lblNombre = new Label("Nombre");
@@ -24,17 +24,28 @@ public class AltaCliente extends Frame implements WindowListener, ActionListener
 	Button btnLimpiar = new Button("Limpiar");
 	BaseDatos bd = new BaseDatos();
 	Connection conexion = null;
+	String[] cadena;
 	Dialog dlgMensaje = new Dialog(this,"Mensaje", true);
 	Label mensaje = new Label("");
+	int idClienteEditar;
 	Utilidades utilidad = new Utilidades();
 	
-	public AltaCliente()
+	public ModificarCliente(int idClienteEditar)
 	{
-		setTitle("Alta Cliente");
+		this.idClienteEditar = idClienteEditar; 
+		// Conectar BD
+		conexion = bd.conectar();
+		cadena = (bd.consultarCliente(conexion, idClienteEditar)).split("-");
+		// cadena[0] = idCliente
+		// cadena[1] = nombreCliente
+		// cadena[2] = fechaAlta
+		setTitle("Modificar Cliente");
 		setLayout(new GridLayout(3,2));
 		add(lblNombre);
+		txtNombre.setText(cadena[1]);
 		add(txtNombre);
 		add(lblFecha);
+		txtFecha.setText(cadena[2]);
 		add(txtFecha);
 		btnAceptar.addActionListener(this);
 		btnLimpiar.addActionListener(this);
@@ -59,18 +70,16 @@ public class AltaCliente extends Frame implements WindowListener, ActionListener
 		}
 		else // btnAceptar
 		{
-			// Conectar BD
-			conexion = bd.conectar();
-			// Hacer INSERT
+			// Hacer UPDATE
 			String[] fechaAmericana = txtFecha.getText().split("/");
-			String sentencia = "INSERT INTO clientes VALUES(null,'"+txtNombre.getText()+"','"+fechaAmericana[2]+"-"+fechaAmericana[1]+"-"+fechaAmericana[0]+"')";
+			String sentencia = "UPDATE clientes SET nombreCliente = '"+txtNombre.getText()+"', fechaAlta = '"+fechaAmericana[2]+"-"+fechaAmericana[1]+"-"+fechaAmericana[0]+"' WHERE idCliente = "+idClienteEditar;
 			utilidad.registrarLog("Jorge",sentencia);
 			// Feedback
-			if((bd.altaCliente(conexion, sentencia))==0)
+			if((bd.modificarCliente(conexion, sentencia))==0)
 			{
 				// Todo bien
-				mensaje.setText("Alta de Cliente correcta");
-				dlgMensaje.setTitle("Alta Cliente");
+				mensaje.setText("Modificación de Cliente correcta");
+				dlgMensaje.setTitle("Modificar Cliente");
 				dlgMensaje.setSize(180,120);
 				dlgMensaje.setLayout(new FlowLayout());
 				dlgMensaje.addWindowListener(this);
@@ -81,8 +90,8 @@ public class AltaCliente extends Frame implements WindowListener, ActionListener
 			else
 			{
 				// Error
-				mensaje.setText("Error en Alta de Cliente");
-				dlgMensaje.setTitle("Alta Cliente");
+				mensaje.setText("Error en Modificación de Cliente");
+				dlgMensaje.setTitle("Modificar Cliente");
 				dlgMensaje.setSize(180,120);
 				dlgMensaje.setLayout(new FlowLayout());
 				dlgMensaje.addWindowListener(this);
@@ -90,9 +99,8 @@ public class AltaCliente extends Frame implements WindowListener, ActionListener
 				dlgMensaje.setLocationRelativeTo(null);
 				dlgMensaje.setVisible(true);
 			}
-			bd.desconectar(conexion);
-			
 			// Desconectar
+			bd.desconectar(conexion);
 		}
 		
 	}

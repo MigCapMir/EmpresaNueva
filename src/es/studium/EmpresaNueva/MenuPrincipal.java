@@ -29,8 +29,6 @@ public class MenuPrincipal extends Frame implements WindowListener, ActionListen
 	Menu facturas = new Menu("Facturas");
 	MenuItem altaFactura = new MenuItem("Alta");
 	MenuItem consultaFactura = new MenuItem("Consulta");
-	MenuItem edicionFactura = new MenuItem("Edición");
-	MenuItem bajaFactura = new MenuItem("Baja");
 	
 	Menu ayuda = new Menu("Ayuda");
 	MenuItem mniAyuda = new MenuItem("Ayuda");
@@ -57,12 +55,8 @@ public class MenuPrincipal extends Frame implements WindowListener, ActionListen
 		servicios.add(bajaServicio);
 		altaFactura.addActionListener(this);
 		consultaFactura.addActionListener(this);
-		edicionFactura.addActionListener(this);
-		bajaFactura.addActionListener(this);
 		facturas.add(altaFactura);
 		facturas.add(consultaFactura);
-		facturas.add(edicionFactura);
-		facturas.add(bajaFactura);
 		mniAyuda.addActionListener(this);
 		ayuda.add(mniAyuda);
 		
@@ -100,6 +94,14 @@ public class MenuPrincipal extends Frame implements WindowListener, ActionListen
 		else if(pulsado.equals(bajaCliente))
 		{
 			new BajaCliente();
+		}
+		else if(pulsado.equals(edicionCliente))
+		{
+			new EdicionCliente();
+		}
+		else if(pulsado.equals(altaFactura))
+		{
+			new AltaFactura();
 		}
 	}
 

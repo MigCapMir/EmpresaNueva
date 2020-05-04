@@ -65,7 +65,7 @@ public class BajaCliente extends Frame implements WindowListener, ActionListener
 		{
 			if(listado.getSelectedItem().equals("Seleccionar un cliente..."))
 			{
-
+				// No hacemos nada
 			}
 			else
 			{
