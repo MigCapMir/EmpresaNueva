@@ -103,6 +103,10 @@ public class MenuPrincipal extends Frame implements WindowListener, ActionListen
 		{
 			new AltaFactura();
 		}
+		else if(pulsado.equals(consultaFactura))
+		{
+			new ConsultaFactura();
+		}
 	}
 
 	@Override

@@ -292,7 +292,101 @@ public class BaseDatos
 		}
 		return(resultado);
 	}
-
+	
+	public String consultarFacturas(Connection c)
+	{
+		String resultado = "";
+		String[] fechaEuropea;
+		try
+		{
+			String sentencia = "SELECT idFactura, fechaFactura, nombreCliente FROM facturas, clientes WHERE idCliente = idClienteFK ORDER BY idFactura";
+			//Crear una sentencia
+			statement = c.createStatement();
+			//Crear un objeto ResultSet para guardar lo obtenido
+			//y ejecutar la sentencia SQL
+			rs = statement.executeQuery(sentencia);
+			while (rs.next())
+			{
+				fechaEuropea = (rs.getString("fechaFactura")).split("-");
+				resultado = resultado + rs.getInt("idFactura") + "-"
+						+ fechaEuropea[2]+"/"+fechaEuropea[1]+"/"+fechaEuropea[0]+ "-"+ rs.getString("nombreCliente")+"\n";
+			}
+		}
+		catch (SQLException sqle)
+		{
+			System.out.println("Error 2-"+sqle.getMessage());
+		}
+		return (resultado);
+	}
+	public String consultarFacturasChoice(Connection c)
+	{
+		String resultado = "";
+		String[] fechaEuropea;
+		try
+		{
+			String sentencia = "SELECT idFactura, fechaFactura, nombreCliente FROM facturas, clientes WHERE idCliente = idClienteFK ORDER BY idFactura";
+			//Crear una sentencia
+			statement = c.createStatement();
+			//Crear un objeto ResultSet para guardar lo obtenido
+			//y ejecutar la sentencia SQL
+			rs = statement.executeQuery(sentencia);
+			while (rs.next())
+			{
+				fechaEuropea = (rs.getString("fechaFactura")).split("-");
+				resultado = resultado + rs.getInt("idFactura") + "-"
+						+ fechaEuropea[2]+"/"+fechaEuropea[1]+"/"+fechaEuropea[0]+ "-"+ rs.getString("nombreCliente")+"#";
+			}
+		}
+		catch (SQLException sqle)
+		{
+			System.out.println("Error 2-"+sqle.getMessage());
+		}
+		return (resultado);
+	}
+	public String consultarFactura(Connection c, int idFactura)
+	{
+		String resultado = "";
+		String[] fechaEuropea;
+		try
+		{
+			String sentencia = "SELECT idFactura, fechaFactura, totalFactura, nombreCliente FROM facturas, clientes WHERE idFactura = "+idFactura+" AND idCliente = idClienteFK ORDER BY idFactura";
+			//Crear una sentencia
+			statement = c.createStatement();
+			//Crear un objeto ResultSet para guardar lo obtenido
+			//y ejecutar la sentencia SQL
+			rs = statement.executeQuery(sentencia);
+			rs.next();
+			fechaEuropea = (rs.getString("fechaFactura")).split("-");
+			resultado = resultado + fechaEuropea[2] + "/" + fechaEuropea[1] + "/" + fechaEuropea[0] + "-"+ rs.getString("nombreCliente") + "-" + rs.getDouble("totalFactura");
+		}
+		catch (SQLException sqle)
+		{
+			System.out.println("Error 2-"+sqle.getMessage());
+		}
+		return (resultado);
+	}
+	public String consultarDetallesFactura(Connection c, int idFactura)
+	{
+		String resultado = "";
+		try
+		{
+			String sentencia = "SELECT cantidad, descripcionServicio, precioServicio, precioServicio*cantidad AS subtotal FROM lineasfactura, servicios WHERE idFacturaFK = "+idFactura+" AND idServicioFK = idServicio";
+			//Crear una sentencia
+			statement = c.createStatement();
+			//Crear un objeto ResultSet para guardar lo obtenido
+			//y ejecutar la sentencia SQL
+			rs = statement.executeQuery(sentencia);
+			while(rs.next())
+			{
+				resultado = resultado + rs.getInt("cantidad") + "-" + rs.getString("descripcionServicio") + "-" + rs.getDouble("precioServicio") + "-" + rs.getDouble("subtotal")+"\n";
+			}
+		}
+		catch (SQLException sqle)
+		{
+			System.out.println("Error 2-"+sqle.getMessage());
+		}
+		return (resultado);
+	}
 	public void desconectar(Connection c)
 	{
 		try

@@ -1,3 +1,8 @@
 04/05/2020 10:53:45[usuario][INSERT INTO clientes VALUES(null,'Luisa Romero','2020-02-02')]
 04/05/2020 10:54:39[usuario][UPDATE clientes SET nombreCliente = 'Nuevo2', fechaAlta = '2020-04-29' WHERE idCliente = 5]
 [04/05/2020 10:56:50][Jorge][INSERT INTO clientes VALUES(null,'zfsgsfg','2020-01-01')]
+[04/05/2020 08:00:50][Jorge][Ingreso en el sistema]
+[04/05/2020 08:00:54][Elena][Ingreso en el sistema]
+
+[04/05/2020 15:04:30][Jorge][Salida del sistema]
+[04/05/2020 15:04:30][Elena][Salida del sistema]
