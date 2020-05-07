@@ -24,6 +24,7 @@ public class BaseDatos
 			Class.forName(driver);
 			//Establecer la conexión con la BD Empresa
 			connection = DriverManager.getConnection(url, login, password);
+			System.out.println("Conectando...");
 		}
 		catch (ClassNotFoundException cnfe)
 		{

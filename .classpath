@@ -2,15 +2,15 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="G:/Users/Jorge/eclipse-workspace/EmpresaNueva/itextpdf-5.4.4.jar"/>
-	<classpathentry kind="lib" path="G:/Users/Jorge/eclipse-workspace/EmpresaNueva/itextpdf-5.4.4-javadoc.jar"/>
-	<classpathentry kind="lib" path="G:/Users/Jorge/eclipse-workspace/EmpresaNueva/itextpdf-5.4.4-sources.jar"/>
-	<classpathentry kind="lib" path="G:/Users/Jorge/eclipse-workspace/EmpresaNueva/itext-pdfa-5.4.4.jar"/>
-	<classpathentry kind="lib" path="G:/Users/Jorge/eclipse-workspace/EmpresaNueva/itext-pdfa-5.4.4-javadoc.jar"/>
-	<classpathentry kind="lib" path="G:/Users/Jorge/eclipse-workspace/EmpresaNueva/itext-pdfa-5.4.4-sources.jar"/>
-	<classpathentry kind="lib" path="G:/Users/Jorge/eclipse-workspace/EmpresaNueva/itext-xtra-5.4.4.jar"/>
-	<classpathentry kind="lib" path="G:/Users/Jorge/eclipse-workspace/EmpresaNueva/itext-xtra-5.4.4-javadoc.jar"/>
-	<classpathentry kind="lib" path="G:/Users/Jorge/eclipse-workspace/EmpresaNueva/itext-xtra-5.4.4-sources.jar"/>
-	<classpathentry kind="lib" path="G:/Users/Jorge/eclipse-workspace/EmpresaNueva/mysql-connector-java-8.0.17.jar"/>
+	<classpathentry kind="lib" path="C:/Users/YoMismo/eclipse-workspace/EmpresaNueva/itext-pdfa-5.4.4-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/YoMismo/eclipse-workspace/EmpresaNueva/itextpdf-5.4.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/YoMismo/eclipse-workspace/EmpresaNueva/itextpdf-5.4.4-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/YoMismo/eclipse-workspace/EmpresaNueva/itextpdf-5.4.4-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/YoMismo/eclipse-workspace/EmpresaNueva/itext-pdfa-5.4.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/YoMismo/eclipse-workspace/EmpresaNueva/itext-pdfa-5.4.4-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/YoMismo/eclipse-workspace/EmpresaNueva/itext-xtra-5.4.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/YoMismo/eclipse-workspace/EmpresaNueva/itext-xtra-5.4.4-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/YoMismo/eclipse-workspace/EmpresaNueva/itext-xtra-5.4.4-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/YoMismo/eclipse-workspace/EmpresaNueva/mysql-connector-java-8.0.17.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
